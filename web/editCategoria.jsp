@@ -23,7 +23,7 @@
             <div class="col-4">
                 <form action="categoriaController" method="post">
 
-                    <input readonly hidden name="CategoriaId" 
+                    <input readonly hidden name="CategoriaId"
                         class="form-control" type="text" name="Codigo" value="${requestScope.Categoria.categoriaid}" />
 
                     <div class="form-group">
