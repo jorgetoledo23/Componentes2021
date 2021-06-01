@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="index.jsp"><img height="50" src="img/Home.png" alt=""/></a>   
@@ -11,7 +12,9 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars mr-3"></i>Categorias</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-
+                        <c:forEach var="C" items="${applicationScope.Categorias}">
+                            <a class="dropdown-item" href="">${C.descripcion}</a>
+                        </c:forEach>
                     </div>
                 </li>
                 <li class="nav-item ml-5"> 

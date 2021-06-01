@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-    <jsp:include page="includes/header.jsp"></jsp:include>
+        <jsp:include page="includes/header.jsp"></jsp:include>
     </head>
     <body>
         
@@ -44,7 +44,8 @@
                         <td>
                             <a href="categoriaController?op=edit&cat=${C.categoriaid}"><i class="fas fa-pencil-alt mt-0 fa-lg"></i></a>
                             <a href="categoriaController?op=details&cat=${C.categoriaid}"><i class="fas fa-info-circle mt-0 fa-lg ml-1"></i></a>
-                            <a href="categoriaController?op=delete&cat=${C.categoriaid}"><i class="fas fa-trash-alt mt-0 fa-lg ml-1"></i></a>
+                            <a onclick="return confirm('Estas seguro de Eliminar la Categoria Seleccionada?')"
+                                href="categoriaController?op=delete&cat=${C.categoriaid}"><i class="fas fa-trash-alt mt-0 fa-lg ml-1"></i></a>
                         </td>
                     </tr>
                     </c:forEach>

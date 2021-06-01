@@ -51,7 +51,8 @@ public class categoriaController extends HttpServlet {
                 break;
                 case "delete":
                     //Eliminar (Desactivar) Categoria
-                    
+                    Db.deleteCategoria(C.getCategoriaid());
+                    response.sendRedirect("categoriaController");
                     break;
                 default:
                     throw new AssertionError();
@@ -84,7 +85,7 @@ public class categoriaController extends HttpServlet {
             case "Guardar Categoria":
                 //Insertar Categoria en la BD
                 db.addCategoria(C);
-                response.sendRedirect("categoriaController");
+                response.sendRedirect("categoriaController");//GET
                 break;
             case "Guardar Cambios":
                 //Actualizo Categoria en la BD
