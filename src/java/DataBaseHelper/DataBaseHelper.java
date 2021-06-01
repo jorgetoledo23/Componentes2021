@@ -1,6 +1,6 @@
 package DataBaseHelper;
 
-import Models.Categoria;
+import Models.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -78,6 +78,21 @@ public class DataBaseHelper {
         return filasAfectadas;
     }
     
+    public int deleteCategoria(int CategoriaId) {
+        int filasAfectadas = 0;
+        try{
+            Class.forName(driver);
+            Con = DriverManager.getConnection(url, usuario, pass);
+            Sentencia = Con.createStatement();
+            filasAfectadas = Sentencia.executeUpdate("DELETE FROM tbl_Categorias "
+                    + "WHERE categoriaid = "+ CategoriaId +"");
+            Sentencia.close();
+            Con.close();
+        }catch(ClassNotFoundException | SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return filasAfectadas;
+    }
     
     public Categoria getCategoriaById(int CategoriaId){
         Categoria C = new Categoria();
@@ -98,14 +113,62 @@ public class DataBaseHelper {
         return C;   
     }
     
-    public int addProducto(Categoria C) {
+    public int addProducto(Producto P) {
         
         int filasAfectadas = 0;
         try{
             Class.forName(driver);
             Con = DriverManager.getConnection(url, usuario, pass);
             Sentencia = Con.createStatement();
-            filasAfectadas = Sentencia.executeUpdate("insert into tbl_categorias (descripcion) values ('"+ C.getDescripcion() +"')");
+            filasAfectadas = Sentencia
+                    .executeUpdate("insert into tbl_Productos "
+                            + "(descripcion, precio,imagen,categoriaid,stock,enOferta,descuento) "
+                            + "values "
+                            + "('"+ P.getDescripcion() +"', '"+ P.getPrecio()+"', '"+ P.getImagen()+"', '"+ P.getCategoriaId()+"','"+ P.getStock()+"', '"+ P.isEnOferta()+"','"+ P.getDescuento()+"')");
+            Sentencia.close();
+            Con.close();
+        }catch(ClassNotFoundException | SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return filasAfectadas;
+    }
+    
+    public List<Producto> seleccionarProductos(){
+        List<Producto> Productos = new ArrayList<Producto>();
+        try{
+        Class.forName(driver);
+        Con = DriverManager.getConnection(url, usuario, pass);
+        Sentencia = Con.createStatement();
+        Filas = Sentencia.executeQuery("select * from tbl_productos");
+        
+        while(Filas.next()){
+            Producto P = new Producto();
+            P.setProductoId(Filas.getInt("productoid"));
+            P.setDescripcion(Filas.getString("descripcion"));
+            P.setStock(Filas.getInt("stock"));
+            P.setPrecio(Filas.getInt("precio"));
+            P.setDescuento(Filas.getInt("descuento"));
+            P.setImagen(Filas.getString("imagen"));
+            P.setEnOferta(Filas.getBoolean("enoferta"));
+            P.setCategoriaId(Filas.getInt("categoriaid"));
+            Productos.add(P);
+        }
+        Sentencia.close();
+        Con.close();
+        } catch(ClassNotFoundException | SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return Productos;  
+    }
+    
+    public int deleteProducto(int ProductoId) {
+        int filasAfectadas = 0;
+        try{
+            Class.forName(driver);
+            Con = DriverManager.getConnection(url, usuario, pass);
+            Sentencia = Con.createStatement();
+            filasAfectadas = Sentencia.executeUpdate("DELETE FROM tbl_Productos "
+                    + "WHERE productoId = "+ ProductoId +"");
             Sentencia.close();
             Con.close();
         }catch(ClassNotFoundException | SQLException e){
