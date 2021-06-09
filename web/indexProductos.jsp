@@ -21,10 +21,10 @@
                 <a class="white-text" href="addProducto.jsp"><i class="fas fa-plus-circle fa-lg mr-2"></i>Agregar Producto</a>
             </div>
             
-            <table class="table table-hover">
+            <table class="table table-hover fs-1">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="fs-1">
                             Codigo
                         </th>
                         <th>
@@ -60,7 +60,7 @@
                             ${P.descripcion}
                         </td>
                         <td>
-                            ${P.imagen}
+                            <img style="height: 100px; width: 100px;" src="img/${P.imagen}" />
                         </td>
                         <td>
                             <fmt:formatNumber value="${P.precio}" type="currency" currencySymbol="$"></fmt:formatNumber>
@@ -68,11 +68,16 @@
                         <td>
                             ${P.stock}
                         </td>
-                        <td>
-                            ${P.enOferta}
+                        <td class="text-center">
+                            <c:if test="${P.enOferta == 1}">
+                                <input class="form-check-input disabled" type="checkbox" checked />
+                            </c:if>
+                            <c:if test="${P.enOferta == 0}">
+                                <input class="form-check-input disabled" type="checkbox" />
+                            </c:if>
                         </td>
                         <td>
-                            ${P.descuento}
+                            <fmt:formatNumber value="${P.descuento}" type="currency" currencySymbol="$"></fmt:formatNumber> 
                         </td>
                         <td>
                             <a href="productoController?op=edit&cat=${P.productoId}"><i class="fas fa-pencil-alt mt-0 fa-lg"></i></a>

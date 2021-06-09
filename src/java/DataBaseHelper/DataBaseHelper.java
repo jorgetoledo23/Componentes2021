@@ -114,7 +114,11 @@ public class DataBaseHelper {
     }
     
     public int addProducto(Producto P) {
-        
+        //String query = "insert into tbl_Productos "
+                            //+ "(descripcion, precio, imagen, categoriaid, stock, enOferta, descuento) "
+                            //+ "values "
+                            //+ "('"+ P.getDescripcion() +"', '"+ P.getPrecio()+"', '"+ P.getImagen()+"', '"+ P.getCategoriaId()+"','"+ P.getStock()+"', '"+ P.isEnOferta()+"','"+ P.getDescuento()+"')";
+        //System.out.println(query);
         int filasAfectadas = 0;
         try{
             Class.forName(driver);
@@ -122,9 +126,9 @@ public class DataBaseHelper {
             Sentencia = Con.createStatement();
             filasAfectadas = Sentencia
                     .executeUpdate("insert into tbl_Productos "
-                            + "(descripcion, precio,imagen,categoriaid,stock,enOferta,descuento) "
+                            + "(descripcion, precio, imagen, categoriaid, stock, enOferta, descuento) "
                             + "values "
-                            + "('"+ P.getDescripcion() +"', '"+ P.getPrecio()+"', '"+ P.getImagen()+"', '"+ P.getCategoriaId()+"','"+ P.getStock()+"', '"+ P.isEnOferta()+"','"+ P.getDescuento()+"')");
+                            + "('"+ P.getDescripcion() +"', '"+ P.getPrecio()+"', '"+ P.getImagen()+"', '"+ P.getCategoriaId()+"','"+ P.getStock()+"', '"+ P.getEnOferta()+"','"+ P.getDescuento()+"')");
             Sentencia.close();
             Con.close();
         }catch(ClassNotFoundException | SQLException e){
@@ -149,7 +153,7 @@ public class DataBaseHelper {
             P.setPrecio(Filas.getInt("precio"));
             P.setDescuento(Filas.getInt("descuento"));
             P.setImagen(Filas.getString("imagen"));
-            P.setEnOferta(Filas.getBoolean("enoferta"));
+            P.setEnOferta(Filas.getInt("enoferta"));
             P.setCategoriaId(Filas.getInt("categoriaid"));
             Productos.add(P);
         }

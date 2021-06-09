@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,38 +18,72 @@
             <a class="white-text" href="prodcutoController"><i class="fas fa-plus-circle fa-lg mr-2"></i>Volver al listado de Productos</a>
         </div>
         
-        <h2>Agregar nuevo Producto</h2>
+
         <hr>
-        <div class="row">
-            <div class="col-4">
-                <form action="productoController" method="post">
-                    <div class="form-group">
-                        <label class="control-label" for="CategoriaDescripcion">Descripcion</label>
-                        <input class="form-control" type="text" name="CategoriaDescripcion" placeholder="Descripcion" required="true" />
+        
+        <form action="productoController" method="post" enctype="multipart/form-data">
+                <div class="row">
+                <div class="col-6">
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="Descripcion">Descripcion</label>
+                        <input class="form-control" type="text" name="Descripcion" placeholder="Descripcion" required="true" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="Precio">Precio</label>
+                        <input class="form-control" type="number" name="Precio" placeholder="Precio" required="true" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="Stock">Stock</label>
+                        <input class="form-control" type="text" name="Stock" placeholder="Stock" required="true" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="CategoriaId">Categoria</label>
+                        
+                        <select class="form-control" name="CategoriaId">
+                            <option>Seleccione...</option>
+                            <c:forEach var="C" items="${applicationScope.Categorias}">
+                                <option value="${C.categoriaid}">${C.descripcion}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+
+                    <p></p>
+                </div>
+                <div class="col-6">
+                    <div class="form-group col-md-12">
+                        <label for="Imagen" class="control-label">Imagen</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="Imagen">
+                            <label class="custom-file-label" for="Imagen">Elegir Imagen</label>
+                        </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="control-label" for="CategoriaDescripcion">Precio</label>
-                        <input class="form-control" type="text" name="CategoriaDescripcion" placeholder="Descripcion" required="true" />
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input name="enOferta" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                            <label class="form-check-label" for="flexCheckDefault"> En Oferta?</label>
+                        </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="control-label" for="CategoriaDescripcion">Stock</label>
-                        <input class="form-control" type="text" name="CategoriaDescripcion" placeholder="Descripcion" required="true" />
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="PrecioOferta">Precio Oferta</label>
+                        <input class="form-control" type="number" name="PrecioOferta" placeholder="Precio Oferta" />
                     </div>
+
+                    <p>${msgError}</p>
+                    <div class="form-group  float-right">
+                        <input name="Accion" class="btn btn-success btn-block" type="submit" value="Guardar Producto" />
+                    </div>
+                </div>
+                
                     
-                    <div class="form-group">
-                        <label class="control-label" for="CategoriaDescripcion">Descuento</label>
-                        <input class="form-control" type="text" name="CategoriaDescripcion" placeholder="Descripcion" required="true" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <input name="Accion" class="btn btn-success btn-block" type="submit" value="Guardar Categoria" />
-                    </div>
-                </form>
-                <p></p>
-            </div>
-        </div>
+                
+                </div>
+            </form>
+        
     </div>
         
         <jsp:include page="includes/footer.jsp"></jsp:include>

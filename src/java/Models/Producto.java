@@ -9,7 +9,7 @@ public class Producto {
     private int Precio;
     private String Imagen;
     private int Stock;
-    private boolean enOferta;
+    private int enOferta;
     private int Descuento;
     private int CategoriaId;
     
@@ -55,11 +55,11 @@ public class Producto {
         this.Stock = Stock;
     }
 
-    public boolean isEnOferta() {
+    public int getEnOferta() {
         return enOferta;
     }
 
-    public void setEnOferta(boolean enOferta) {
+    public void setEnOferta(int enOferta) {
         this.enOferta = enOferta;
     }
 
