@@ -13,5 +13,11 @@
                 Administrar Productos
             </a>
         </li>
+        <li class="nav-item">
+            <a href="CategoriaIndex.jsp" class="nav-link white-text">
+                <i class="fab fa-product-hunt"></i>
+                Administrar Productos 2
+            </a>
+        </li>
     </ul>    
 </nav>

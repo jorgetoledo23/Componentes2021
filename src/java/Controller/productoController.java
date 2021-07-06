@@ -57,7 +57,8 @@ public class productoController extends HttpServlet {
         P.setPrecio(Integer.parseInt(request.getParameter("Precio")));
         P.setStock(Integer.parseInt(request.getParameter("Stock")));
         P.setDescuento(Integer.parseInt(request.getParameter("PrecioOferta")));
-        if (Boolean.parseBoolean(request.getParameter("enOferta"))) {
+        System.out.println(request.getParameter("enOferta"));
+        if ("on".equals(request.getParameter("enOferta"))) {
             P.setEnOferta(1);
         }else{
             P.setEnOferta(0);

@@ -27,8 +27,17 @@ public class inicioController extends HttpServlet {
         DataBaseHelper Db = new DataBaseHelper();
         List<Categoria> Categorias = Db.seleccionarCategorias();
         getServletContext().setAttribute("Categorias", Categorias);
-        System.out.println("Iniciamos desde inicioController");
+        //System.out.println("Iniciamos desde inicioController");
+        
+        if (request.getParameter("categoriaId") != null) {
+            int categoriaId = Integer.parseInt(request.getParameter("categoriaId"));
+            getServletContext().setAttribute("ProductosCategoria", Db.seleccionarProductosPorCategoria(categoriaId));
+            response.sendRedirect("homeClientes.jsp");
+        }
+        else{
         response.sendRedirect("index.jsp");
+        }
+        
     }
 
 

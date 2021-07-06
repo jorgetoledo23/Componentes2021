@@ -13,7 +13,7 @@
                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars mr-3"></i>Categorias</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <c:forEach var="C" items="${applicationScope.Categorias}">
-                            <a class="dropdown-item" href="">${C.descripcion}</a>
+                            <a class="dropdown-item" href="inicioController?categoriaId=${C.categoriaid}">${C.descripcion}</a>
                         </c:forEach>
                     </div>
                 </li>
@@ -29,9 +29,9 @@
         </div>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
-                <a href="CarroCompras.jsp" class="nav-link waves-effect waves-light">
+                <a href="carroCompras.jsp" class="nav-link waves-effect waves-light">
                     <i class="fas fa-shopping-cart fa-2x"></i>
-                    <span class="badge badge-danger ml-2">${length}</span>
+                    <span class="badge badge-danger ml-2">${sessionScope.itemscarro}</span>
                 </a>
             </li>
             <li class="nav-item">

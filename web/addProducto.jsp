@@ -63,7 +63,7 @@
                     
                     <div class="form-group col-md-6">
                         <div class="form-check">
-                            <input name="enOferta" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                            <input name="enOferta" class="form-check-input" type="checkbox" id="flexCheckDefault" />
                             <label class="form-check-label" for="flexCheckDefault"> En Oferta?</label>
                         </div>
                     </div>

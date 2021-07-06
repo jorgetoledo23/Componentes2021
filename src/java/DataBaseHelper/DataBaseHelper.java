@@ -165,6 +165,68 @@ public class DataBaseHelper {
         return Productos;  
     }
     
+    
+    public Producto seleccionarProductoById(String id){
+        Producto Pr = new Producto();
+        try{
+        Class.forName(driver);
+        Con = DriverManager.getConnection(url, usuario, pass);
+        Sentencia = Con.createStatement();
+        Filas = Sentencia.executeQuery("select * from tbl_productos where productoid = "+id+"");
+        
+        while(Filas.next()){
+            
+            Pr.setProductoId(Filas.getInt("productoid"));
+            Pr.setDescripcion(Filas.getString("descripcion"));
+            Pr.setStock(Filas.getInt("stock"));
+            Pr.setPrecio(Filas.getInt("precio"));
+            Pr.setDescuento(Filas.getInt("descuento"));
+            Pr.setImagen(Filas.getString("imagen"));
+            Pr.setEnOferta(Filas.getInt("enoferta"));
+            Pr.setCategoriaId(Filas.getInt("categoriaid"));
+
+        }
+        Sentencia.close();
+        Con.close();
+        } catch(ClassNotFoundException | SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return Pr;  
+    }
+    
+    
+    
+    public List<Producto> seleccionarProductosPorCategoria(int CategoriaId){
+        List<Producto> Productos = new ArrayList<Producto>();
+        try{
+        Class.forName(driver);
+        Con = DriverManager.getConnection(url, usuario, pass);
+        Sentencia = Con.createStatement();
+        Filas = Sentencia.executeQuery("select * from tbl_productos where categoriaid = "+CategoriaId+"");
+        
+        while(Filas.next()){
+            Producto P = new Producto();
+            P.setProductoId(Filas.getInt("productoid"));
+            P.setDescripcion(Filas.getString("descripcion"));
+            P.setStock(Filas.getInt("stock"));
+            P.setPrecio(Filas.getInt("precio"));
+            P.setDescuento(Filas.getInt("descuento"));
+            P.setImagen(Filas.getString("imagen"));
+            P.setEnOferta(Filas.getInt("enoferta"));
+            P.setCategoriaId(Filas.getInt("categoriaid"));
+            Productos.add(P);
+        }
+        Sentencia.close();
+        Con.close();
+        } catch(ClassNotFoundException | SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return Productos;  
+    }
+    
+    
+    
+    
     public int deleteProducto(int ProductoId) {
         int filasAfectadas = 0;
         try{
